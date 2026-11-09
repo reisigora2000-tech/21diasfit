@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Desafio 21 Dias +Fit com Israel Andrade</title>
+<meta name="theme-color" content="#0c0c0c">
+<link rel="preload" as="image" href="assets/israel_hero.jpg">
+<link rel="preload" as="font" href="assets/Figtree.ttf" type="font/ttf" crossorigin>
+<meta name="description" content="21 dias treinando com o Israel, direto no WhatsApp, em casa ou na academia. Começa 3 de dezembro.">
+<meta property="og:title" content="Desafio 21 Dias +Fit com Israel Andrade">
+<meta property="og:description" content="21 dias de treino, em casa ou na academia. Começa 3 de dezembro.">
+<meta property="og:image" content="https://reisigora2000-tech.github.io/21diasfit/assets/israel_hero.jpg">
+<style>
+@font-face{font-family:Figtree;src:url(assets/Figtree.ttf) format("truetype");font-weight:300 900;font-display:swap}
+:root{--preto:#0c0c0c;--grafite:#1e1e1e;--linha:#333;--lima:#D6FF3F;--branco:#fff;--cinza:#bdbdbd;--erro:#ff8a7a}
+*{box-sizing:border-box;margin:0}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{background:var(--preto);color:var(--branco);font:600 18px/1.5 Figtree,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+.vazado,.cheio{display:block;font-weight:900;text-transform:uppercase;line-height:1;letter-spacing:-.01em}
+.vazado{color:transparent;-webkit-text-stroke:1.6px var(--branco);font-size:clamp(46px,13vw,76px);letter-spacing:.005em}
+.cheio{color:var(--lima);font-size:clamp(36px,14.4vw,86px);margin-top:6px}
+h1,h2{font-weight:900}
+.hero{position:relative;overflow:hidden}
+.foto{position:relative;height:min(84vw,62vh);min-height:280px;background:#20262c}
+.foto img.ph{width:100%;height:100%;object-fit:cover;object-position:50% 12%}
+.foto:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.55) 0,rgba(0,0,0,0) 26%)}
+.logo{position:absolute;top:22px;left:20px;width:170px;z-index:2}
+.fita{position:relative;z-index:3;margin:-30px -30px 0;background:var(--lima);color:var(--preto);transform:rotate(-2.6deg);overflow:hidden;font-weight:900;font-size:19px;letter-spacing:.02em;white-space:nowrap;padding:9px 0}
+.mq{display:inline-block;animation:corre 28s linear infinite}
+@keyframes corre{to{transform:translateX(-50%)}}
+.miolo{width:100%;max-width:640px;margin:0 auto;padding:0 20px}
+.topo{padding-top:26px;padding-bottom:36px}
+.sub{font-size:19px;line-height:1.35;font-weight:700;margin-top:14px}
+.data{color:var(--lima);font-weight:700;margin-top:10px}
+.botao{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--lima);color:var(--preto);font:900 21px/1 Figtree,sans-serif;border:0;border-radius:999px;padding:21px 34px;text-decoration:none;cursor:pointer;width:100%;margin-top:20px;min-height:58px;touch-action:manipulation}
+.botao:disabled{opacity:.6;cursor:wait}
+:focus-visible{outline:3px solid var(--branco);outline-offset:3px}
+section.bloco{padding:46px 0;border-top:1px solid var(--linha)}
+.lista{list-style:none;padding:0;margin-top:26px;display:grid;gap:18px}
+.lista li{display:grid;grid-template-columns:30px 1fr;gap:14px;align-items:start}
+.lista svg{width:30px;height:30px;margin-top:1px}
+.par{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:30px}
+.par figure{position:relative;margin:0;border-radius:18px;overflow:hidden;height:210px}
+.par img{width:100%;height:100%;object-fit:cover}
+.par figcaption{position:absolute;left:10px;bottom:10px;background:var(--lima);color:var(--preto);font-weight:900;font-size:16px;padding:4px 12px;border-radius:9px}
+.dia{list-style:none;padding:0;margin-top:26px}
+.dia li{display:grid;grid-template-columns:92px 1fr;gap:14px;padding:14px 0;border-bottom:1px solid var(--linha)}
+.dia b{color:var(--lima);font-weight:900}
+.karla{display:grid;grid-template-columns:96px 1fr;gap:16px;align-items:center;margin-top:28px;padding-top:24px;border-top:1px solid var(--linha);font-size:16px;color:var(--cinza)}
+.karla img{width:96px;height:96px;object-fit:cover;object-position:48% 22%;border-radius:16px}
+.karla strong{display:block;color:var(--branco);font-weight:800;font-size:18px}
+.datas{display:grid;gap:12px;margin-top:26px}
+.linha{display:grid;grid-template-columns:1fr auto;align-items:center;gap:14px;background:var(--grafite);border-radius:18px;padding:18px 20px}
+.linha h3{font-size:21px;font-weight:900;line-height:1.15}
+.linha p{font-size:16px;color:var(--cinza)}
+.preco{background:var(--branco);color:var(--preto);font-weight:900;font-size:20px;border-radius:999px;padding:9px 16px;white-space:nowrap}
+.ini{background:var(--lima);color:var(--preto)}
+.ini p{color:var(--preto)}
+form{margin-top:30px;display:grid;gap:24px}
+label.c,fieldset{display:block;border:0;padding:0;min-width:0}
+.t,legend{display:block;font-weight:800;margin-bottom:9px;padding:0}
+input[type=text],input[type=tel],input[type=email],select{width:100%;background:var(--grafite);color:var(--branco);border:2px solid var(--linha);border-radius:14px;padding:16px;font:600 18px Figtree,sans-serif}
+select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,#fff 50%),linear-gradient(135deg,#fff 50%,transparent 50%);background-position:calc(100% - 22px) 25px,calc(100% - 15px) 25px;background-size:7px 7px;background-repeat:no-repeat}
+input:focus,select:focus{border-color:var(--lima);outline:0}
+.ops{display:flex;flex-wrap:wrap;gap:9px}
+.ops label{cursor:pointer}
+.ops input{position:absolute;opacity:0;width:1px;height:1px}
+.ops span{display:block;min-height:48px;background:var(--grafite);border:2px solid var(--linha);border-radius:999px;padding:12px 18px;font-weight:700}
+.ops input:checked+span{background:var(--lima);border-color:var(--lima);color:var(--preto);font-weight:900}
+.ops input:focus-visible+span{outline:3px solid var(--branco);outline-offset:2px}
+.aceite{display:grid;grid-template-columns:26px 1fr;gap:12px;font-size:16px;color:var(--cinza);cursor:pointer}
+.aceite input{width:24px;height:24px;accent-color:var(--lima);margin-top:2px}
+.msg{font-weight:700;color:var(--erro);min-height:0}
+.campo-erro{display:block;color:var(--erro);font-size:15px;margin-top:6px}
+.oculto{position:absolute;left:-9999px}
+.ok{background:var(--lima);color:var(--preto);border-radius:20px;padding:26px 24px;margin-top:30px}
+.ok h3{font-weight:900;font-size:28px;line-height:1.1}
+footer{border-top:1px solid var(--linha);padding:34px 0 calc(46px + env(safe-area-inset-bottom));font-size:15px;color:var(--cinza)}
+footer img{width:150px;margin-bottom:14px}
+.fixo{position:fixed;left:0;right:0;bottom:0;z-index:9;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(12,12,12,0),rgba(12,12,12,.94) 34%);transition:transform .2s,opacity .2s}
+.fixo .botao{margin-top:0}
+.fixo.fora{transform:translateY(110%);opacity:0;pointer-events:none}
+body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
+@media (max-width:359px){.linha{grid-template-columns:1fr}.preco{justify-self:start}.dia li{grid-template-columns:76px 1fr}}
+@media (min-width:900px){
+ .fixo{display:none}
+ body{padding-bottom:0}
+ .foto{min-height:640px}
+ .hero{display:grid;grid-template-columns:1fr 1fr;align-items:stretch;min-height:640px}
+ .foto{height:auto}
+ .foto{grid-column:1;grid-row:1}.topo{grid-column:2;grid-row:1}.fita{grid-column:1/-1;grid-row:2;margin-top:-22px}
+ .topo{align-self:center;max-width:560px;padding:50px}
+ .botao{width:auto}
+}
+@media (prefers-reduced-motion:reduce){.mq{animation:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="foto">
+    <img class="ph" fetchpriority="high" src="assets/israel_hero.jpg" alt="Israel Andrade, personal trainer, sorrindo e apontando">
+    <img class="logo" src="assets/logo.png" alt="Você Mais Fit">
+  </div>
+  <div class="fita" aria-hidden="true"><span class="mq" id="mq"></span></div>
+  <div class="miolo topo">
+    <h1><span class="vazado">Desafio</span><span class="cheio">21 dias +fit</span></h1>
+    <p class="sub">21 dias treinando comigo, direto no seu WhatsApp. Em casa ou na academia, você escolhe.</p>
+    <p class="data">Começa 3 de dezembro e termina antes do Natal.</p>
+    <a class="botao" href="#quero">Quero saber primeiro</a>
+  </div>
+</header>
+
+<main class="miolo">
+  <section class="bloco">
+    <h2><span class="vazado">Como</span><span class="cheio">funciona</span></h2>
+    <ul class="lista" id="lista"></ul>
+    <div class="par">
+      <figure><img loading="lazy" src="assets/treino_casal.jpg" alt="Casal fazendo agachamento na sala de casa"><figcaption>Em casa</figcaption></figure>
+      <figure><img loading="lazy" src="assets/israel_kettlebell.jpg" alt="Israel na academia com um kettlebell" style="object-position:55% 20%"><figcaption>Na academia</figcaption></figure>
+    </div>
+    <div class="karla">
+      <img loading="lazy" src="assets/karla_cozinha.jpg" alt="Karla Mariana, nutricionista">
+      <p><strong>Karla Mariana</strong>Nutricionista funcional, CRN-3 72150. É ela quem manda as dicas de alimentação no grupo.</p>
+    </div>
+  </section>
+
+  <section class="bloco">
+    <h2><span class="vazado">Um dia</span><span class="cheio">no desafio</span></h2>
+    <ol class="dia">
+      <li><b>Manhã</b><span>Chega no grupo o vídeo com o treino do dia.</span></li>
+      <li><b>Tarde</b><span>Dica de alimentação da Karla.</span></li>
+      <li><b>Noite</b><span>Conteúdo de mentalidade com a Monica e check-in pra marcar presença.</span></li>
+    </ol>
+  </section>
+
+  <section class="bloco">
+    <h2><span class="vazado">Anota</span><span class="cheio">as datas</span></h2>
+    <div class="datas">
+      <div class="linha"><div><h3>Lista VIP, dia 19/11</h3><p>Só por 24 horas</p></div><span class="preco">R$ 69,90</span></div>
+      <div class="linha"><div><h3>Inscrições de 21 a 30/11</h3><p>Pagamento único</p></div><span class="preco">R$ 89,90</span></div>
+      <div class="linha ini"><div><h3>Dia 3/12 a gente começa</h3><p>E termina antes do Natal</p></div></div>
+    </div>
+  </section>
+
+  <section class="bloco" id="quero">
+    <h2><span class="vazado">Quer saber</span><span class="cheio">primeiro?</span></h2>
+    <p class="sub">Deixa seus dados que eu te aviso quando a Lista VIP abrir.</p>
+
+    <form id="form" novalidate>
+      <label class="c"><span class="t">Seu nome</span><input type="text" name="nome" autocomplete="name" required></label>
+      <label class="c"><span class="t">WhatsApp com DDD</span><input type="tel" name="whatsapp" autocomplete="tel" inputmode="tel" placeholder="(15) 99999-9999" required></label>
+      <label class="c"><span class="t">E-mail</span><input type="email" name="email" autocomplete="email" required></label>
+      <label class="c"><span class="t">Como você me conheceu?</span>
+        <select name="origem" required><option value="">Escolha uma opção</option><option>Instagram do Israel</option><option>Indicação de alguém</option><option>WhatsApp</option><option>Anúncio</option><option>Outro</option></select></label>
+      <fieldset data-grupo="local"><legend>Onde você quer treinar?</legend><div class="ops">
+        <label><input type="radio" name="local" value="Em casa" required><span>Em casa</span></label>
+        <label><input type="radio" name="local" value="Na academia"><span>Na academia</span></label>
+        <label><input type="radio" name="local" value="Ainda não sei"><span>Ainda não sei</span></label></div></fieldset>
+      <fieldset data-grupo="dificuldade"><legend>O que mais te atrapalha hoje?</legend><div class="ops">
+        <label><input type="radio" name="dificuldade" value="Falta de tempo" required><span>Falta de tempo</span></label>
+        <label><input type="radio" name="dificuldade" value="Falta de motivação"><span>Falta de motivação</span></label>
+        <label><input type="radio" name="dificuldade" value="Não sei o que fazer"><span>Não sei o que fazer</span></label>
+        <label><input type="radio" name="dificuldade" value="Alimentação"><span>Alimentação</span></label></div></fieldset>
+      <fieldset data-grupo="interesse"><legend>Qual o seu interesse no desafio?</legend><div class="ops">
+        <label><input type="radio" name="interesse" value="Quero entrar no desafio" required><span>Quero entrar</span></label>
+        <label><input type="radio" name="interesse" value="Quero saber mais"><span>Quero saber mais</span></label>
+        <label><input type="radio" name="interesse" value="Só estou olhando"><span>Só estou olhando</span></label></div></fieldset>
+      <input class="oculto" type="text" name="site" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <label class="aceite"><input type="checkbox" name="consentimento" required><span>Aceito receber mensagens, ligações e e-mails sobre o desafio. Posso pedir pra sair quando quiser.</span></label>
+      <p class="msg" id="msg" role="alert"></p>
+      <button class="botao" id="enviar" type="submit">Quero receber as novidades</button>
+    </form>
+    <div class="ok" id="ok" hidden tabindex="-1"><h3 id="okt"></h3><p>Fica de olho no seu WhatsApp. No dia 19/11 abre a Lista VIP.</p></div>
+  </section>
+</main>
+
+<div class="fixo fora" id="fixo"><a class="botao" href="#quero">Quero saber primeiro</a></div>
+<footer><div class="miolo">
+  <img loading="lazy" src="assets/logo.png" alt="Você Mais Fit">
+  <p>Desafio 21 Dias +Fit com Israel Andrade, @personalisrael.<br>Seus dados ficam só com a equipe do desafio e são usados só pra falar sobre ele.</p>
+</div></footer>
+
+<script>
+// Depois de publicar o Apps Script, cole aqui o endereço terminado em /exec.
+const ENDERECO_DA_PLANILHA = "https://script.google.com/macros/s/AKfycbyv6IMomM5Feq8mZl5mqYd7zmvbl9gGu0az3j3oqIXVbCCBrCzsw8Vv5h763rR58Ls/exec";
+
+document.getElementById("mq").textContent = "COMEÇA 03/12 • LISTA VIP ABRE 19/11 • ".repeat(14);
+const CK = '<svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="20" fill="#D6FF3F"/><path d="M11 21l6.5 6.5L30 13" fill="none" stroke="#0c0c0c" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+["Treino novo todo dia, de 15 a 20 minutos, com uma versão pra casa e outra pra academia.",
+ "Dicas de alimentação todos os dias com a Karla, nossa nutricionista.",
+ "A Monica, nossa mentora, te ajudando a não largar no meio.",
+ "Uma live por semana comigo pra tirar suas dúvidas.",
+ "Check-in todo dia no grupo, pra você ter companhia até o fim."
+].forEach(t=>{const li=document.createElement("li");li.innerHTML=CK+"<span></span>";li.lastChild.textContent=t;document.getElementById("lista").appendChild(li);});
+
+const fixo=document.getElementById("fixo"),vis=new Set();new IntersectionObserver(es=>{es.forEach(e=>e.isIntersecting?vis.add(e.target):vis.delete(e.target));fixo.classList.toggle("fora",vis.size>0);}).observe(document.querySelector("#quero"));
+const topoBtn=new IntersectionObserver(es=>es.forEach(e=>{e.isIntersecting?vis.add(e.target):vis.delete(e.target);fixo.classList.toggle("fora",vis.size>0);}),{threshold:1});topoBtn.observe(document.querySelector("header a.botao"));
+const form=document.getElementById("form"),msg=document.getElementById("msg"),btn=document.getElementById("enviar");
+const wpp=form.elements.whatsapp;
+wpp.addEventListener("input",()=>{let d=wpp.value.replace(/\D/g,"").slice(0,11),s=d;if(d.length>2)s="("+d.slice(0,2)+") "+d.slice(2);if(d.length>7)s="("+d.slice(0,2)+") "+d.slice(2,d.length-4)+"-"+d.slice(-4);wpp.value=s;});
+function linkDeOrigem(){const p=new URLSearchParams(location.search);const u=["utm_source","utm_medium","utm_campaign","ref"].map(k=>p.get(k)).filter(Boolean).join(" / ");return u||document.referrer||"Acesso direto";}
+function marca(el,texto){const alvo=el.closest("label.c,fieldset,.aceite");if(!alvo||alvo.querySelector(".campo-erro"))return;const s=document.createElement("span");s.className="campo-erro";s.textContent=texto;alvo.appendChild(s);}
+function valida(){form.querySelectorAll(".campo-erro").forEach(e=>e.remove());const f=form.elements;let ok=true;const erro=(el,t)=>{ok=false;marca(el,t);};
+ if(f.nome.value.trim().length<2)erro(f.nome,"Escreva seu nome.");
+ if(wpp.value.replace(/\D/g,"").length<10)erro(wpp,"Escreva o WhatsApp com DDD.");
+ if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.value.trim()))erro(f.email,"Escreva um e-mail válido, como nome@gmail.com.");
+ if(!f.origem.value)erro(f.origem,"Escolha como você me conheceu.");
+ ["local","dificuldade","interesse"].forEach(n=>{if(!f[n].value)erro(form.querySelector('[data-grupo="'+n+'"]'),"Escolha uma opção.");});
+ if(!f.consentimento.checked)erro(f.consentimento,"Marque aqui pra eu poder te avisar.");
+ return ok;}
+form.addEventListener("submit",async e=>{e.preventDefault();msg.textContent="";if(!valida()){form.querySelector(".campo-erro").scrollIntoView({block:"center"});return;}
+ const f=form.elements;const dados={nome:f.nome.value,whatsapp:wpp.value,email:f.email.value,origem:f.origem.value,link:linkDeOrigem(),local:f.local.value,dificuldade:f.dificuldade.value,interesse:f.interesse.value,consentimento:true,site:f.site.value};
+ btn.disabled=true;btn.textContent="Enviando...";
+ try{const r=await fetch(ENDERECO_DA_PLANILHA,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(dados)});const j=await r.json();if(!j.ok)throw 0;
+  form.hidden=true;const ok=document.getElementById("ok");document.getElementById("okt").textContent="Recebi, "+f.nome.value.trim().split(" ")[0]+"!";ok.hidden=false;ok.focus({preventScroll:true});ok.scrollIntoView({block:'center',behavior:'instant'});}
+ catch(_){msg.textContent="Não foi possível enviar. Confira sua internet e toque em enviar de novo.";btn.disabled=false;btn.textContent="Quero receber as novidades";}
+});
+</script>
+</body>
+</html>
