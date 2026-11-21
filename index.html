@@ -79,6 +79,8 @@ input:focus,select:focus{border-color:var(--lima);outline:0}
 .oculto{position:absolute;left:-9999px}
 .ok{background:var(--lima);color:var(--preto);border-radius:20px;padding:26px 24px;margin-top:30px}
 .ok h3{font-weight:900;font-size:28px;line-height:1.1}
+.ok .botao{background:var(--preto);color:var(--lima);width:100%;white-space:nowrap}
+.ok .det{font-size:15px;margin-top:10px;opacity:.8}
 footer{border-top:1px solid var(--linha);padding:34px 0 calc(46px + env(safe-area-inset-bottom));font-size:15px;color:var(--cinza)}
 footer img{width:150px;margin-bottom:14px}
 .fixo{position:fixed;left:0;right:0;bottom:0;z-index:9;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(12,12,12,0),rgba(12,12,12,.94) 34%);transition:transform .2s,opacity .2s}
@@ -148,7 +150,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
   <section class="bloco" id="quero">
     <h2><span class="vazado">Quer saber</span><span class="cheio">primeiro?</span></h2>
-    <p class="sub">Deixa seus dados que eu te aviso quando a Lista VIP abrir.</p>
+    <p class="sub" id="quero-sub">Deixa seus dados que eu te aviso quando a Lista VIP abrir.</p>
 
     <form id="form" novalidate>
       <label class="c"><span class="t">Seu nome</span><input type="text" name="nome" autocomplete="name" required></label>
@@ -174,7 +176,7 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
       <p class="msg" id="msg" role="alert"></p>
       <button class="botao" id="enviar" type="submit">Quero receber as novidades</button>
     </form>
-    <div class="ok" id="ok" hidden tabindex="-1"><h3 id="okt"></h3><p>Fica de olho no seu WhatsApp. Na Black Friday, sexta, 27/11, às 8h, abre a Lista VIP.</p></div>
+    <div class="ok" id="ok" hidden tabindex="-1"><h3 id="okt"></h3><p id="okp">Fica de olho no seu WhatsApp. Na Black Friday, sexta, 27/11, às 8h, abre a Lista VIP.</p></div>
   </section>
 </main>
 
@@ -199,6 +201,26 @@ const CK = '<svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" 
 
 const fixo=document.getElementById("fixo"),vis=new Set();new IntersectionObserver(es=>{es.forEach(e=>e.isIntersecting?vis.add(e.target):vis.delete(e.target));fixo.classList.toggle("fora",vis.size>0);}).observe(document.querySelector("#quero"));
 const topoBtn=new IntersectionObserver(es=>es.forEach(e=>{e.isIntersecting?vis.add(e.target):vis.delete(e.target);fixo.classList.toggle("fora",vis.size>0);}),{threshold:1});topoBtn.observe(document.querySelector("header a.botao"));
+
+// Fases (horário de Brasília): Lista VIP aberta de 27/11 8h até 28/11 8h. Teste: ?fase=vip ou ?fase=inscricoes
+const ABRE_VIP=Date.UTC(2026,10,27,11,0), FECHA_VIP=Date.UTC(2026,10,28,11,0);
+const PAGINA_DE_VENDAS="https://vocemaisfit.netlify.app/?utm_source=cadastro&utm_medium=bio&utm_campaign=lista-vip";
+const FASE=(()=>{const t=new URLSearchParams(location.search).get("fase");if(t)return t;const n=Date.now();return n<ABRE_VIP?"antes":n<FECHA_VIP?"vip":"inscricoes";})();
+if(FASE==="vip"){
+ document.getElementById("quero-sub").textContent="A Lista VIP abriu! Deixa seus dados e o link pra garantir os R$ 69,90 aparece na hora.";
+ document.getElementById("enviar").textContent="Quero entrar na Lista VIP";
+ document.querySelectorAll('a.botao[href="#quero"]').forEach(a=>a.textContent="Entrar na Lista VIP");
+}else if(FASE==="inscricoes"){
+ document.getElementById("quero-sub").textContent="As inscrições estão abertas até 02/12. Deixa seus dados e o link aparece na hora.";
+ document.getElementById("enviar").textContent="Quero me inscrever";
+ document.querySelectorAll('a.botao[href="#quero"]').forEach(a=>a.textContent="Quero me inscrever");
+}
+function mostraLink(ok){
+ if(FASE==="antes")return;
+ const p=document.getElementById("okp");
+ p.textContent=FASE==="vip"?"Você está na Lista VIP. Garante sua vaga por R$ 69,90 até amanhã, sábado, às 8h. Depois, R$ 89,90.":"As inscrições estão abertas até quarta, 02/12. Garante sua vaga por R$ 89,90.";
+ const a=document.createElement("a");a.className="botao";a.href=PAGINA_DE_VENDAS;a.textContent=FASE==="vip"?"Garantir por R$ 69,90":"Garantir minha vaga";ok.appendChild(a);
+}
 const form=document.getElementById("form"),msg=document.getElementById("msg"),btn=document.getElementById("enviar");
 const wpp=form.elements.whatsapp;
 wpp.addEventListener("input",()=>{let d=wpp.value.replace(/\D/g,"").slice(0,11),s=d;if(d.length>2)s="("+d.slice(0,2)+") "+d.slice(2);if(d.length>7)s="("+d.slice(0,2)+") "+d.slice(2,d.length-4)+"-"+d.slice(-4);wpp.value=s;});
@@ -216,7 +238,7 @@ form.addEventListener("submit",async e=>{e.preventDefault();msg.textContent="";i
  const f=form.elements;const dados={nome:f.nome.value,whatsapp:wpp.value,email:f.email.value,origem:f.origem.value,link:linkDeOrigem(),local:f.local.value,dificuldade:f.dificuldade.value,interesse:f.interesse.value,consentimento:true,site:f.site.value};
  btn.disabled=true;btn.textContent="Enviando...";
  try{const r=await fetch(ENDERECO_DA_PLANILHA,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(dados)});const j=await r.json();if(!j.ok)throw 0;
-  form.hidden=true;const ok=document.getElementById("ok");document.getElementById("okt").textContent="Recebi, "+f.nome.value.trim().split(" ")[0]+"!";ok.hidden=false;ok.focus({preventScroll:true});ok.scrollIntoView({block:'center',behavior:'instant'});}
+  form.hidden=true;const ok=document.getElementById("ok");document.getElementById("okt").textContent="Recebi, "+f.nome.value.trim().split(" ")[0]+"!";mostraLink(ok);ok.hidden=false;ok.focus({preventScroll:true});ok.scrollIntoView({block:'center',behavior:'instant'});}
  catch(_){msg.textContent="Não foi possível enviar. Confira sua internet e toque em enviar de novo.";btn.disabled=false;btn.textContent="Quero receber as novidades";}
 });
 </script>
