@@ -155,22 +155,6 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
     <form id="form" novalidate>
       <label class="c"><span class="t">Seu nome</span><input type="text" name="nome" autocomplete="name" required></label>
       <label class="c"><span class="t">WhatsApp com DDD</span><input type="tel" name="whatsapp" autocomplete="tel" inputmode="tel" placeholder="(15) 99999-9999" required></label>
-      <label class="c"><span class="t">E-mail</span><input type="email" name="email" autocomplete="email" required></label>
-      <label class="c"><span class="t">Como você me conheceu?</span>
-        <select name="origem" required><option value="">Escolha uma opção</option><option>Instagram do Israel</option><option>Indicação de alguém</option><option>WhatsApp</option><option>Anúncio</option><option>Outro</option></select></label>
-      <fieldset data-grupo="local"><legend>Onde você quer treinar?</legend><div class="ops">
-        <label><input type="radio" name="local" value="Em casa" required><span>Em casa</span></label>
-        <label><input type="radio" name="local" value="Na academia"><span>Na academia</span></label>
-        <label><input type="radio" name="local" value="Ainda não sei"><span>Ainda não sei</span></label></div></fieldset>
-      <fieldset data-grupo="dificuldade"><legend>O que mais te atrapalha hoje?</legend><div class="ops">
-        <label><input type="radio" name="dificuldade" value="Falta de tempo" required><span>Falta de tempo</span></label>
-        <label><input type="radio" name="dificuldade" value="Falta de motivação"><span>Falta de motivação</span></label>
-        <label><input type="radio" name="dificuldade" value="Não sei o que fazer"><span>Não sei o que fazer</span></label>
-        <label><input type="radio" name="dificuldade" value="Alimentação"><span>Alimentação</span></label></div></fieldset>
-      <fieldset data-grupo="interesse"><legend>Qual o seu interesse no desafio?</legend><div class="ops">
-        <label><input type="radio" name="interesse" value="Quero entrar no desafio" required><span>Quero entrar</span></label>
-        <label><input type="radio" name="interesse" value="Quero saber mais"><span>Quero saber mais</span></label>
-        <label><input type="radio" name="interesse" value="Só estou olhando"><span>Só estou olhando</span></label></div></fieldset>
       <input class="oculto" type="text" name="site" tabindex="-1" autocomplete="off" aria-hidden="true">
       <label class="aceite"><input type="checkbox" name="consentimento" required><span>Aceito receber mensagens, ligações e e-mails sobre o desafio. Posso pedir pra sair quando quiser.</span></label>
       <p class="msg" id="msg" role="alert"></p>
@@ -229,13 +213,11 @@ function marca(el,texto){const alvo=el.closest("label.c,fieldset,.aceite");if(!a
 function valida(){form.querySelectorAll(".campo-erro").forEach(e=>e.remove());const f=form.elements;let ok=true;const erro=(el,t)=>{ok=false;marca(el,t);};
  if(f.nome.value.trim().length<2)erro(f.nome,"Escreva seu nome.");
  if(wpp.value.replace(/\D/g,"").length<10)erro(wpp,"Escreva o WhatsApp com DDD.");
- if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.value.trim()))erro(f.email,"Escreva um e-mail válido, como nome@gmail.com.");
- if(!f.origem.value)erro(f.origem,"Escolha como você me conheceu.");
- ["local","dificuldade","interesse"].forEach(n=>{if(!f[n].value)erro(form.querySelector('[data-grupo="'+n+'"]'),"Escolha uma opção.");});
  if(!f.consentimento.checked)erro(f.consentimento,"Marque aqui pra eu poder te avisar.");
  return ok;}
 form.addEventListener("submit",async e=>{e.preventDefault();msg.textContent="";if(!valida()){form.querySelector(".campo-erro").scrollIntoView({block:"center"});return;}
- const f=form.elements;const dados={nome:f.nome.value,whatsapp:wpp.value,email:f.email.value,origem:f.origem.value,link:linkDeOrigem(),local:f.local.value,dificuldade:f.dificuldade.value,interesse:f.interesse.value,consentimento:true,site:f.site.value};
+ const f=form.elements;const veioDoAnuncio=new URLSearchParams(location.search).get("utm_medium")==="pago";
+ const dados={nome:f.nome.value,whatsapp:wpp.value,email:"",origem:veioDoAnuncio?"Anúncio":"Instagram do Israel",link:linkDeOrigem(),local:"",dificuldade:"",interesse:"Quero entrar na Lista VIP",consentimento:true,site:f.site.value};
  btn.disabled=true;btn.textContent="Enviando...";
  try{const r=await fetch(ENDERECO_DA_PLANILHA,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(dados)});const j=await r.json();if(!j.ok)throw 0;
   form.hidden=true;const ok=document.getElementById("ok");document.getElementById("okt").textContent="Recebi, "+f.nome.value.trim().split(" ")[0]+"!";mostraLink(ok);ok.hidden=false;ok.focus({preventScroll:true});ok.scrollIntoView({block:'center',behavior:'instant'});}
