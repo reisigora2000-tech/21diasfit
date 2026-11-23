@@ -332,7 +332,7 @@ function mostraLink(ok){
 }
 const form=document.getElementById("form"),msg=document.getElementById("msg"),btn=document.getElementById("enviar");
 const wpp=form.elements.whatsapp;
-wpp.addEventListener("input",()=>{let d=wpp.value.replace(/\D/g,"").slice(0,11),s=d;if(d.length>2)s="("+d.slice(0,2)+") "+d.slice(2);if(d.length>7)s="("+d.slice(0,2)+") "+d.slice(2,d.length-4)+"-"+d.slice(-4);wpp.value=s;});
+wpp.addEventListener("input",()=>{let d=wpp.value.replace(/\D/g,"");if(d.length>11&&d.startsWith("55"))d=d.slice(2);d=d.slice(0,11);let s=d;if(d.length>2)s="("+d.slice(0,2)+") "+d.slice(2);if(d.length>7)s="("+d.slice(0,2)+") "+d.slice(2,d.length-4)+"-"+d.slice(-4);wpp.value=s;});
 function linkDeOrigem(){const p=new URLSearchParams(location.search);const u=["utm_source","utm_medium","utm_campaign","ref"].map(k=>p.get(k)).filter(Boolean).join(" / ");return u||document.referrer||"Acesso direto";}
 function marca(el,texto){const alvo=el.closest("label.c,fieldset");if(!alvo||alvo.querySelector(".campo-erro"))return;const s=document.createElement("span");s.className="campo-erro";s.textContent=texto;alvo.appendChild(s);}
 function valida(){form.querySelectorAll(".campo-erro").forEach(e=>e.remove());const f=form.elements;let ok=true;const erro=(el,t)=>{ok=false;marca(el,t);};
