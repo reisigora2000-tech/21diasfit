@@ -129,8 +129,7 @@ input:focus,select:focus{border-color:var(--lima);outline:0}
 .ops span{display:block;min-height:48px;background:var(--grafite);border:2px solid var(--linha);border-radius:999px;padding:12px 18px;font-weight:700}
 .ops input:checked+span{background:var(--lima);border-color:var(--lima);color:var(--preto);font-weight:900}
 .ops input:focus-visible+span{outline:3px solid var(--branco);outline-offset:2px}
-.aceite{display:grid;grid-template-columns:26px 1fr;gap:12px;font-size:16px;color:var(--cinza);cursor:pointer}
-.aceite input{width:24px;height:24px;accent-color:var(--lima);margin-top:2px}
+.aceite{margin-top:10px;font-size:14px;line-height:1.4;color:var(--cinza);text-align:center}
 .msg{font-weight:700;color:var(--erro);min-height:0}
 .campo-erro{display:block;color:var(--erro);font-size:15px;margin-top:6px}
 .oculto{position:absolute;left:-9999px}
@@ -176,9 +175,8 @@ body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
       <div class="passo" data-p="2" hidden><label class="c"><span class="t">Seu WhatsApp com DDD (é por ele que vai o link)</span><input type="tel" name="whatsapp" autocomplete="tel" inputmode="tel" placeholder="(15) 99999-9999" required></label><button class="botao prox" type="button">OK →</button><button class="volta" type="button">← voltar</button></div>
       <div class="passo" data-p="3" hidden><label class="c"><span class="t">E o seu e-mail</span><input type="email" name="email" autocomplete="email" required></label>
       <input class="oculto" type="text" name="site" tabindex="-1" autocomplete="off" aria-hidden="true">
-      <label class="aceite"><input type="checkbox" name="consentimento" required><span>Aceito receber mensagens, ligações e e-mails sobre o desafio. Posso pedir pra sair quando quiser.</span></label>
       <p class="msg" id="msg" role="alert"></p>
-      <button class="botao brilho" id="enviar" type="submit">Quero entrar na Lista VIP</button><button class="volta" type="button">← voltar</button></div>
+      <button class="botao brilho" id="enviar" type="submit">Quero entrar na Lista VIP</button><p class="aceite">Ao enviar, você aceita receber mensagens sobre o desafio. Pode sair quando quiser.</p><button class="volta" type="button">← voltar</button></div>
     </form>
     <div class="ok" id="ok" hidden tabindex="-1"><h3 id="okt"></h3><p id="okp">Fica de olho no seu WhatsApp. Na Black Friday, sexta, 27/11, às 8h, abre a Lista VIP.</p></div>
     <p class="confianca">146 mil seguidores no Instagram · 10 anos de personal · CREF 136182-G/SP</p>
@@ -336,12 +334,11 @@ const form=document.getElementById("form"),msg=document.getElementById("msg"),bt
 const wpp=form.elements.whatsapp;
 wpp.addEventListener("input",()=>{let d=wpp.value.replace(/\D/g,"").slice(0,11),s=d;if(d.length>2)s="("+d.slice(0,2)+") "+d.slice(2);if(d.length>7)s="("+d.slice(0,2)+") "+d.slice(2,d.length-4)+"-"+d.slice(-4);wpp.value=s;});
 function linkDeOrigem(){const p=new URLSearchParams(location.search);const u=["utm_source","utm_medium","utm_campaign","ref"].map(k=>p.get(k)).filter(Boolean).join(" / ");return u||document.referrer||"Acesso direto";}
-function marca(el,texto){const alvo=el.closest("label.c,fieldset,.aceite");if(!alvo||alvo.querySelector(".campo-erro"))return;const s=document.createElement("span");s.className="campo-erro";s.textContent=texto;alvo.appendChild(s);}
+function marca(el,texto){const alvo=el.closest("label.c,fieldset");if(!alvo||alvo.querySelector(".campo-erro"))return;const s=document.createElement("span");s.className="campo-erro";s.textContent=texto;alvo.appendChild(s);}
 function valida(){form.querySelectorAll(".campo-erro").forEach(e=>e.remove());const f=form.elements;let ok=true;const erro=(el,t)=>{ok=false;marca(el,t);};
  if(f.nome.value.trim().length<2)erro(f.nome,"Escreva seu nome.");
  if(wpp.value.replace(/\D/g,"").length<10)erro(wpp,"Escreva o WhatsApp com DDD.");
  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.value.trim()))erro(f.email,"Escreva um e-mail válido, como nome@gmail.com.");
- if(!f.consentimento.checked)erro(f.consentimento,"Marque aqui pra eu poder te avisar.");
  return ok;}
 const passos=[...form.querySelectorAll('.passo')];let atual=0;
 function mostra(i){passos.forEach((p,k)=>p.hidden=k!==i);atual=i;document.getElementById('passo-n').textContent=(i+1)+' de 3';document.getElementById('barra').style.width=((i+1)/3*100)+'%';const c=passos[i].querySelector('input:not([type=checkbox])');if(c)setTimeout(()=>c.focus({preventScroll:true}),60);}
